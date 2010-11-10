@@ -76,3 +76,8 @@ more examples
 BUGS: if you insert lines above a sign they'll move. Thus the remembered line
 number in b:placed_signs and the actual line number will differ. For most use
 cases this will not be a problem though.
+
+
+upstream
+========
+http://github.com/MarcWeber/vim-addon-signs
