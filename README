@@ -1,0 +1,53 @@
+example usage:
+==============
+  See plugin/vim-addon-signs.vim
+
+  To support this plugin in your plugin copy paste one of the following lines after settming the quickfix or location list:
+
+      if exists(':UpdateLocationlistSigns') | UpdateLocationlistSigns | endif
+
+      if exists(':UpdateQuickfixSigns') | UpdateQuickfixSigns | endif
+
+  Users can then opt out by adding this to their .vimrc:
+  let g:vim_addon_signs = { 'provide_qf_command' : 0, 'provide_el_command' : 0 }
+
+why?
+====
+
+- the signs api is broken (You can't ensure that you're not using an ID a different plugin is used).
+  By providing a sane interface (asking all plugins to use it) you can get rid of
+  possible issues of using the same id twice by accident
+
+- avoid redrawing.
+  exec 'sign unplace 3454324' | exec 'sign place 3454324 line=3  name=ensime_marker_error file='.expand('%')
+  Will make the sign area go away and popup again. If you place the same sign no redrawing should take place
+
+design choices
+==============
+
+- differential: Only apply differences
+
+- push: You tell the plugin when a set of signs has changed.
+  Its not the responsibility of this plugin to find out - nor is it
+  to overcome missing "quickfix list changed" events in Vim.
+  So if you want to do fancy stuff such as tracking cursor position its your
+  responsibility to push the new location list when needed
+
+  This means if you want to track quickfix list you have to tell this list when
+  it changed. (see example usage)
+
+- its your responsibility to register sign types
+  Eg use such a line to define error markers once:
+  sign define NAME text=! linehl=ErrorMsg
+
+- stop after X signs for speed reasons (defaults to 1000)
+
+alternatives to this plugin:
+============================
+  An alternative implementation is provided by quickfixsigns (by Tim Pope). Here
+  the signs are reevaluated on BufEnter events etc. It can also show balloons.
+  I think its overkill for some use cases. Also the "buffer" orientated nature of it
+  doesn't fit my use case - I don't want to workaround it by something like this:
+  tlib#win#WinCmd("reset signs for this visible buffer")
+
+  The process_max setting is inspired by quickfixsigns though.
