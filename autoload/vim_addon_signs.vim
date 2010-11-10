@@ -58,3 +58,10 @@ fun! vim_addon_signs#SignsFromLocationList(list, name)
   endfor
   return r
 endf
+
+" return a unique sign number.
+" The code above is not using it for performance reasons
+fun! vim_addon_signs#UniqueSignNumber()
+  let s:c.next_id += 1
+  return s:c.next_id -1
+endf
