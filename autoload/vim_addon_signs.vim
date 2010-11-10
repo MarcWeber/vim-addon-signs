@@ -1,7 +1,7 @@
 " exec scriptmanager#DefineAndBind('s:c','g:vim_addon_signs','{}')
 if !exists('g:vim_addon_signs') | let g:vim_addon_signs = {} | endif | let s:c = g:vim_addon_signs
 
-let s:c['next_id'] = get(s:c, 'next_id', 1)
+let s:c['next_id'] = get(s:c, 'next_id', 54674)
 
 " for speed reasons never process more than 1000
 let s:c['process_max'] = get(s:c, 'process_max', 1000)
