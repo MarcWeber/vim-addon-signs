@@ -52,7 +52,7 @@ alternatives to this plugin:
 
   The process_max setting is inspired by quickfixsigns though.
 
-another example
+more examples
 ===============
   As example how to implement to show the last cursor position in all windows
   (Note: If you show the same buffer multiple times .. this won't be correct, but there is no way setting a marker for a window + buffer only)
@@ -64,3 +64,15 @@ another example
       \   let b:last_cursor_pos = [bufnr('%'), line('.'), 'cursor_location']
       \ | call vim_addon_signs#Push("last_cursor_pos", map(filter(range(1, bufnr('$')), 'bufexists(v:val) && has_key(getbufvar(v:val,""),"last_cursor_pos")'), 'getbufvar(v:val, "last_cursor_pos")' ))
   augroup end
+
+  Add a dummy sign so that the left column showing the signs is always present:
+  " can't use an opaque sign :-(
+  sign define dummy text=.
+  augroup TRACK_LAST_CURSOR_POS_FOR_EACH_WINDOW
+    au!
+    autocmd BufNew * call vim_addon_signs#Push("dummy", map(filter(range(1, bufnr('$')), 'bufexists(v:val)'), '[v:val, 1, "dummy"]' ))
+  augroup end
+
+BUGS: if you insert lines above a sign they'll move. Thus the remembered line
+number in b:placed_signs and the actual line number will differ. For most use
+cases this will not be a problem though.
