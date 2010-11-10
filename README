@@ -51,3 +51,16 @@ alternatives to this plugin:
   tlib#win#WinCmd("reset signs for this visible buffer")
 
   The process_max setting is inspired by quickfixsigns though.
+
+another example
+===============
+  As example how to implement to show the last cursor position in all windows
+  (Note: If you show the same buffer multiple times .. this won't be correct, but there is no way setting a marker for a window + buffer only)
+
+  sign define cursor_location text=-
+  augroup TRACK_LAST_CURSOR_POS_FOR_EACH_WINDOW
+    au!
+    autocmd CursorHold,CursorHoldI,CursorMoved,CursorMovedI *
+      \   let b:last_cursor_pos = [bufnr('%'), line('.'), 'cursor_location']
+      \ | call vim_addon_signs#Push("last_cursor_pos", map(filter(range(1, bufnr('$')), 'bufexists(v:val) && has_key(getbufvar(v:val,""),"last_cursor_pos")'), 'getbufvar(v:val, "last_cursor_pos")' ))
+  augroup end
