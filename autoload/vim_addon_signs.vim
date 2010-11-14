@@ -23,7 +23,8 @@ fun! vim_addon_signs#Push(category, signs)
     if !bufexists(bufnr) | continue | endif
     let bufdict = getbufvar(bufnr, "")
     let bufdict['placed_signs'] = get(bufdict, "placed_signs", {})
-    let placed_signs = bufdict.placed_signs
+    let placed_signs = get(bufdict.placed_signs, a:category, {})
+    let bufdict.placed_signs[a:category] = placed_signs
     let new_dict = {}
     for i in get(sort_by_buf_nr, bufnr, [])
       let key = string(i)
