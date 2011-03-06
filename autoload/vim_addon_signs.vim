@@ -1,4 +1,4 @@
-" exec scriptmanager#DefineAndBind('s:c','g:vim_addon_signs','{}')
+" exec vam#DefineAndBind('s:c','g:vim_addon_signs','{}')
 if !exists('g:vim_addon_signs') | let g:vim_addon_signs = {} | endif | let s:c = g:vim_addon_signs
 
 let s:c['next_id'] = get(s:c, 'next_id', 54674)
