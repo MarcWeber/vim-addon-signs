@@ -11,6 +11,7 @@ let s:c['process_max'] = get(s:c, 'process_max', 1000)
 " signs: list of the signs. a sign is a list [ bufnr, line, name ]
 " To remove all signs pass an empty list
 fun! vim_addon_signs#Push(category, signs)
+  if !has('signs') | return | endif
   let sort_by_buf_nr = {}
   for i in a:signs[:s:c.process_max]
     let b = i[0]

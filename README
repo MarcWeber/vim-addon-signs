@@ -81,3 +81,9 @@ cases this will not be a problem though.
 upstream
 ========
 http://github.com/MarcWeber/vim-addon-signs
+
+
+related work
+===========
+mark errors using syntax highlighting:
+http://www.vim.org/account/profile.php?user_id=9552
