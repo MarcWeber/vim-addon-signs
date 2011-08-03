@@ -52,6 +52,10 @@ alternatives to this plugin:
 
   The process_max setting is inspired by quickfixsigns though.
 
+
+  mark errors using syntax highlighting:
+  http://www.vim.org/account/profile.php?user_id=9552
+
 more examples
 ===============
   As example how to implement to show the last cursor position in all windows
@@ -83,7 +87,3 @@ upstream
 http://github.com/MarcWeber/vim-addon-signs
 
 
-related work
-===========
-mark errors using syntax highlighting:
-http://www.vim.org/account/profile.php?user_id=9552
