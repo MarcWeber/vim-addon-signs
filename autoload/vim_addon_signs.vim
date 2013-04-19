@@ -31,7 +31,7 @@ fun! vim_addon_signs#Push(category, signs)
       let key = string(i)
       let new_dict[key] = 1
       if has_key(placed_signs, key) | continue | endif
-      " place new signs which wasn't placed yet
+      " place new signs which weren't placed yet
       " echom "placing sign ".key
       exec 'sign place ' . next . " line=" . i[0] . " name=".i[1]." buffer=".bufnr
       let placed_signs[key] = next
